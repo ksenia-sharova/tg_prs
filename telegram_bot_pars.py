@@ -15,17 +15,21 @@ def make_telegrambot(token):
         @bot.message_handler(content_types=['text'])
         def send_num_page(message):
                 if message.text.lower() == 'go':
-                        bot.send_message(message.chat.id, 'Введи номер страницы для поиска (от 1 до 100):')
-                        #msg = bot.reply_to(message, 'Введи номер страницы для поиска (от 1 до 100):')
-                        #bot.register_next_step_handler(msg, send_results)
+                        #bot.send_message(message.chat.id, 'Введи номер страницы для поиска (от 1 до 100):')
+                        msg = bot.reply_to(message, 'Введи номер страницы для поиска (от 1 до 100):')
+                        bot.register_next_step_handler(msg, send_results)
                 #else:
                         #bot.send_message(message.chat.id, 'Что-то не то. Напиши мне в ответ "go"')
         
         def send_results(message):
                 lst_num = list(map(str,range(1, 101)))
                 if message.text in lst_num:
-                        #num_page = message.text
-                        bot.send_message(message.chat.id, message.text)
+                        #num_page = int(message.text)
+                        #try:
+                        #bot.send_message(message.chat.id, ex_wb.common_func(message.text), parse_mode='html')
+                        bot.send_message(message.chat.id, ex_wb.common_func(message.text))
+                        
+                        #bot.send_message(message.chat.id, message.text)
 
 
                 #if message.text.lower() == 'go':
