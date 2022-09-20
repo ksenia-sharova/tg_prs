@@ -1,7 +1,6 @@
 import requests
 import json
 
-
 def numerate_page(num_page):        
         headers = {
         'Accept': '*/*',
@@ -40,21 +39,33 @@ def get_current_data(current_file):
                 'Цена со скидкой': item['salePriceU']}
         )
 
-        return df[:10]
+        return df
+        
 
+def chek_brend(df,brend):
+        brend_data = []
+        for cur_data in df:
+                #print(cur_data)
+                try:
+                        if brend in cur_data['Бренд']:
+                                brend_data.append(cur_data)
+                except:
+                        print('Нет наушников от этого производителя')
+        print(brend_data)
+        return brend_data
 
-def common_func(num_page):
-        numerate_page(num_page)
+def connect_func(num_page):
         current_file = numerate_page(num_page)
+        print(get_current_data(current_file))
         return get_current_data(current_file)
 
-
 def main(num_page, brend):
-        common_func(num_page)
-        res = common_func(num_page)
+        d = connect_func(num_page)
+        a = chek_brend(d, brend)
+        print(len(a))
 
 
 if __name__ == '__main__':
-        page = input('Введите номер страницы для поиска:')
-        name_brend = input('Введите название бренда:')
-        main(page, name_brend)
+        num = input()
+        brend = input()
+        main(num,brend)
