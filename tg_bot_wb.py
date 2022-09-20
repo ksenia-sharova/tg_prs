@@ -23,14 +23,15 @@ def make_telegrambot(token):
                 bot.register_next_step_handler(msg, send_results)
             elif message.text == 'Хочу найти по бренду':
                 markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
-                xiomi = types.KeyboardButton('Xiaomi')
+                #xiomi = types.KeyboardButton('Xiaomi')
                 apple = types.KeyboardButton('Apple')
                 jbl = types.KeyboardButton('JBL')
                 honor = types.KeyboardButton('Honor')
                 samsung = types.KeyboardButton('Samsung')
                 huawei = types.KeyboardButton('Huawei')
                 main_menu = types.KeyboardButton('Вернуться в главное меню')
-                markup.add(xiomi, apple, jbl, honor,samsung, huawei, main_menu)
+                #markup.add(xiomi, apple, jbl, honor,samsung, huawei, main_menu)
+                markup.add(apple, jbl, honor,samsung, huawei, main_menu)
                 msg = bot.send_message(message.chat.id, 'Выбери бренд', reply_markup= markup)
                 bot.register_next_step_handler(msg, send_brend_results)
             elif message.text == 'Вернуться в главное меню':
@@ -54,7 +55,8 @@ def make_telegrambot(token):
             bot.send_message(message.chat.id,'?', reply_markup=markup)
 
         def send_brend_results(message):
-            lst_brand = ['Xiaomi','Apple', 'JBL', 'Honor', 'Samsung', 'Huawei']
+            #lst_brand = ['Xiaomi','Apple', 'JBL', 'Honor', 'Samsung', 'Huawei']
+            lst_brand = ['Apple', 'JBL', 'Honor', 'Samsung', 'Huawei']
             if message.text in lst_brand:
                 for i in range(1,4):
                     name_df = ex_wb_brend.connect_func(i)
